@@ -46,3 +46,8 @@
 .header nav a.active {
 	background: rgba(0,0,0,0.4);
 }
+
+body {
+	background-color: #073642;
+	color: #eee8d5;
+}
