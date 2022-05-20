@@ -22,6 +22,10 @@ class App {
         }
         const sortedDictionary = lodash.sortBy(Object.entries(dictionary), entry => entry[1]).reverse();
         console.log(sortedDictionary);
+
+        const topWords = sortedDictionary.slice(0, 100).map(entry => entry[0]);
+        fs.writeFileSync('../chatbot/src/data/topWords.js',
+            'export default topWords = ' + JSON.stringify(topWords) + ';');
     }
 }
 
