@@ -17,6 +17,7 @@ class App {
                 for (const word of words) {
                     dictionary[word] = (dictionary[word] || 0) + 1;
                 }
+                console.log(words);
             }
         }
         const sortedDictionary = lodash.sortBy(Object.entries(dictionary), entry => entry[1]).reverse();
@@ -34,12 +35,22 @@ function getWords(text: string) {
             words.push(word.toLowerCase());
             word = '';
         }
+
+        if (isChainBreaker(character))
+            if (words.length && isLetter(words[words.length - 1]))
+                words.push('.');
     }
+    if (word.length)
+        words.push(word);
     return words;
 }
 
-function isLetter(c: string) {
-  return c.toString().toLowerCase() != c.toString().toUpperCase();
+function isLetter(text: string) {
+    return text.toString().toLowerCase() != text.toString().toUpperCase();
+}
+
+function isChainBreaker(text: string) {
+    return [';', '.', ':', '!', '?'].includes(text);
 }
 
 new App().run();
