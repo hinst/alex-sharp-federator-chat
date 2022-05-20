@@ -47,7 +47,6 @@ function getWords(text: string) {
             words.push(word.toLowerCase());
             word = '';
         }
-
         if (isChainBreaker(character))
             if (words.length && isLetter(words[words.length - 1]))
                 words.push('.');
