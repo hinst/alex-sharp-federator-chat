@@ -53,7 +53,7 @@ function getWords(text: string) {
                 words.push('.');
     }
     if (word.length)
-        words.push(word);
+        words.push(word.toLowerCase());
     if (words.length && words[words.length - 1] == '.')
         words.pop();
     return words;
