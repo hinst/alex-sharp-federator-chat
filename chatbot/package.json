@@ -21,6 +21,7 @@
     ]
   },
   "dependencies": {
+    "lodash": "^4.17.21",
     "preact": "^10.3.1",
     "preact-render-to-string": "^5.1.4",
     "preact-router": "^3.2.1"
@@ -28,6 +29,7 @@
   "devDependencies": {
     "@types/enzyme": "^3.10.5",
     "@types/jest": "^26.0.8",
+    "@types/lodash": "^4.14.182",
     "@typescript-eslint/eslint-plugin": "^2.25.0",
     "@typescript-eslint/parser": "^2.25.0",
     "enzyme": "^3.11.0",

@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import { MESSAGES, TOP_WORDS } from '../data/topWords';
+import lodash from 'lodash';
 
 export default class Chat extends Component {
     state = { message: '' };
@@ -48,16 +49,22 @@ export default class Chat extends Component {
             !(chainingWordIndex == 0 && message.indexOf(chainingWord) == 0)
         );
         if (messages2.length == 0)
-            messages2 = MESSAGES;
+            messages2 = MESSAGES.filter(message => message != message1);
         const message2 = messages2[Math.floor(Math.random() * messages2.length)];
 
         console.log(message1, chainingWord, message2);
         if (message1.includes(chainingWord)) {
             const [sentence1, direction1] = findSentencePart(message1, chainingWordIndex);
-            if (message2.includes(chainingWord)) {
-                const [sentence2, direction2] = findSentencePart(message2, message2.indexOf(chainingWord), (-1) * direction1);
-                console.log(sentence1, sentence2);
-            }
+            const chainingWordIndex2 = message2.includes(chainingWord) ? message2.indexOf(chainingWord) : Math.floor(Math.random() * message2.length);
+            const [sentence2, direction2] = findSentencePart(message2, chainingWordIndex2, (-1) * direction1);
+            const combinedSentence = direction1 < 0 && direction2 > 0
+                ? lodash.concat(sentence1, sentence2)
+                : direction2 < 0 && direction1 > 0
+                    ? lodash.concat(sentence2, sentence1)
+                    : direction1 > 0 && direction2 > 0
+                        ? lodash.concat(sentence1.slice(1), sentence2)
+                        : lodash.concat(sentence2, sentence1.slice(0, sentence1.length - 1));
+            console.log(direction1, direction2, formatSentence(combinedSentence));
         }
     }
 }
@@ -109,4 +116,8 @@ function findSentencePart(message: string[], index: number, direction?: number):
                 sentence.unshift(word);
     }
     return [sentence, direction];
+}
+
+function formatSentence(message: string[]): string {
+    return lodash.upperFirst(message.join(' ')) + '.';
 }
