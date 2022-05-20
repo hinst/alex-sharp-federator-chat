@@ -63,7 +63,7 @@ function isLetter(text: string) {
 }
 
 function isChainBreaker(text: string) {
-    return [';', '.', ':', '!', '?'].includes(text);
+    return [';', '.', ':', '!', '?', ','].includes(text);
 }
 
 new App().run();
