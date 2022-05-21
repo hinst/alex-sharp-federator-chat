@@ -4,8 +4,6 @@ import SkypeMessage from './SkypeMessage';
 import TelegramMessage from './TelegramMessage';
 import { JSDOM } from 'jsdom';
 
-const SKYPE_TEXT_MESSAGE_TYPES = ['Text', 'RichText'];
-
 class App {
     myTelegramId = 'user718097882';
     mySkypeId = '8:h_instance';
